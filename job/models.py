@@ -30,6 +30,8 @@ class User(AbstractUser):
     first_name = None  # Ignore first_name
     last_name = None  # Ignore last_name
 
+    email = models.EmailField(unique=True)  # Ensure email is unique
+    fullname = models.CharField(max_length=255)
     ROLE_CHOICES = [
         ('employer', 'Employer'),
         ('job_seeker', 'Job Seeker'),
