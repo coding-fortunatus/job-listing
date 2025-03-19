@@ -1,0 +1,22 @@
+<form method="post">
+    {% csrf_token %}
+    <label>Email:</label>
+    {{ form.email }}
+    <br>
+    <label>Full Name:</label>
+    {{ form.fullname }}
+    <br>
+    <label>Phone Number:</label>
+    {{ form.phone }}
+    <br>
+    <label>Job Position:</label>
+    {{ form.position }}
+    <br>
+    <label>Password:</label>
+    {{ form.password }}
+    <br>
+    <label>Confirm Password:</label>
+    {{ form.confirm_password }}
+    <br>
+    <button type="submit">Register</button>
+</form>

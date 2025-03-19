@@ -60,7 +60,6 @@ class User(AbstractUser):
         blank=True, null=True, help_text="Years of experience")
     english_level = models.CharField(
         max_length=100, blank=True, null=True, help_text="English proficiency level")
-    industry = models.CharField(max_length=100, blank=True, null=True)
     work_experience = models.TextField(blank=True, null=True)
     accomplishments = models.TextField(blank=True, null=True)
     expectations = models.TextField(blank=True, null=True)
@@ -73,6 +72,5 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'  # Use email as the unique identifier
     REQUIRED_FIELDS = ['fullname', 'phone']  # required fields
 
-
-def __str__(self):
-    return self.fullname
+    def __str__(self):
+        return self.fullname
