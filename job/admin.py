@@ -4,7 +4,7 @@ from django.utils.html import format_html
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'fullname', 'display_profile', 'resume')
+    list_display = ('email', 'fullname', 'display_profile', 'resume_cv')
 
     def display_profile(self, obj):
         if obj.profile:
