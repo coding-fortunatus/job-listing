@@ -35,6 +35,18 @@ class User(AbstractUser):
         ('contract', 'Contract'),
         ('remote', 'Remote')
     ]
+    CATEGORY_CHOICES = [
+        ('', 'Select Category'),
+        ('software_development', 'Software Development'),
+        ('design', 'Design'),
+        ('marketing', 'Marketing'),
+        ('customer_service', 'Customer Service'),
+        ('finance', 'Finance'),
+        ('human_resources', 'Human Resources'),
+        ('healthcare', 'Healthcare'),
+        ('education', 'Education'),
+        ('other', 'Other')
+    ]
     username = None  # Remove username field
     first_name = None  # Ignore first_name
     last_name = None  # Ignore last_name
@@ -47,9 +59,9 @@ class User(AbstractUser):
     position = models.CharField(max_length=255, blank=True, null=True)
     picture = models.ImageField(upload_to='profiles/', blank=True, null=True)
     category = models.CharField(
-        max_length=255, blank=True, null=True, help_text="Primary job category")
+        max_length=255, blank=True, null=True, choices=CATEGORY_CHOICES)
     secondary_category = models.CharField(
-        max_length=255, blank=True, null=True, help_text="Secondary job category")
+        max_length=255, blank=True, null=True, choices=CATEGORY_CHOICES)
     country_of_residence = models.CharField(
         max_length=255, blank=True, null=True)
     city_of_residence = models.CharField(max_length=255, blank=True, null=True)
@@ -57,9 +69,9 @@ class User(AbstractUser):
     resume_cv = models.FileField(upload_to='resumes/', blank=True, null=True)
     skills = models.TextField(blank=True, null=True)
     experience = models.IntegerField(
-        blank=True, null=True, help_text="Years of experience")
+        blank=True, null=True)
     english_level = models.CharField(
-        max_length=100, blank=True, null=True, help_text="English proficiency level")
+        max_length=100, blank=True, null=True)
     work_experience = models.TextField(blank=True, null=True)
     accomplishments = models.TextField(blank=True, null=True)
     expectations = models.TextField(blank=True, null=True)

@@ -1,7 +1,7 @@
 # from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
-from .forms import CustomUserRegistrationForm
+from .forms import CustomUserRegistrationForm, UpdateUserProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -12,7 +12,7 @@ User = get_user_model()
 
 def index(request):
     jobs = Job.objects.all()
-    return render(request, 'site/index.html', {'jobs': jobs})
+    return render(request, template_name='site/index.html', context={'jobs': jobs})
 
 
 def register(request):
@@ -54,6 +54,20 @@ def user_login(request):
         return redirect("login")
 
     return render(request, template_name="site/login.html")
+
+
+@login_required(login_url='login')
+def profile(request):
+    if request.method == 'POST':
+        form = UpdateUserProfileForm(
+            request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully")
+            return redirect('profile')
+    else:
+        form = UpdateUserProfileForm(instance=request.user)
+    return render(request, template_name='site/profile.html', context={'form': form})
 
 
 @login_required(login_url='login')

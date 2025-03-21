@@ -44,3 +44,37 @@ class CustomUserRegistrationForm(forms.Form):
         user = User.objects.create_user(
             email=email, fullname=fullname, phone=phone, position=position, password=password)
         return user
+
+
+class UpdateUserProfileForm(forms.ModelForm):
+    EMPLOYMENT_OPTIONS = [
+        ('full_time', 'Full Time'),
+        ('part_time', 'Part Time'),
+        ('contract', 'Contract'),
+        ('remote', 'Remote')
+    ]
+
+    class Meta:
+        model = User  # Use your actual User model
+        fields = [
+            'picture', 'category', 'secondary_category', 'country_of_residence',
+            'city_of_residence', 'salary_expectation', 'resume_cv', 'skills',
+            'experience', 'english_level', 'work_experience', 'accomplishments',
+            'expectations', 'employment_options'
+        ]
+        widgets = {
+            'picture': forms.FileInput(attrs={'class': 'form-control', 'accept': 'image/*'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'secondary_category': forms.Select(attrs={'class': 'form-control'}),
+            'country_of_residence': forms.TextInput(attrs={'class': 'form-control'}),
+            'city_of_residence': forms.TextInput(attrs={'class': 'form-control'}),
+            'salary_expectation': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'resume_cv': forms.FileInput(attrs={'class': 'form-control', 'accept': 'application/pdf'}),
+            'skills': forms.Textarea(attrs={'class': 'form-control'}),
+            'experience': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'english_level': forms.TextInput(attrs={'class': 'form-control'}),
+            'work_experience': forms.Textarea(attrs={'class': 'form-control'}),
+            'accomplishments': forms.Textarea(attrs={'class': 'form-control'}),
+            'expectations': forms.Textarea(attrs={'class': 'form-control'}),
+            'employment_options': forms.Select(attrs={'class': 'form-control'}),
+        }

@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+		<link
+			rel="stylesheet"
+			href="{% static '/assets/css/bootstrap.min.css' %}" />
+		<link
+			rel="stylesheet"
+			href="{% static '/assets/css/meanmenu.min.css' %}" />
+		<link
+			rel="stylesheet"
+			href="{% static '/assets/css/magnific-popup.min.css' %}" />
+		<link rel="stylesheet" href="{% static '/assets/css/style.css' %}" />
+		<link
+			rel="stylesheet"
+			href="{% static '/assets/css/responsive.css' %}" />
+
+		<title>Create account - Job Portal</title>
+	</head>
+
+	<body>
+		<!-- Start User Area -->
+		<section class="user-area pt-3">
+			<div class="user-form-content max-width-600">
+				<form class="user-form" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<h3>Create an account</h3>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if user.picture %}
+                        <img src="{{ user.picture.url }}" class="rounded-circle img-fluid" alt="Profile Picture" width="100">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.jpg' %}" class="rounded-circle img-fluid" alt="Default Profile" width="100">
+                    {% endif %}
+                    <br>
+                    {% if user.resume_cv %}
+                        <p><strong>Resume:</strong> <a href="{{ user.resume_cv.url }}" target="_blank" class="btn btn-primary">Download Resume</a></p>
+                    {% else %}
+                        <p>No resume uploaded</p>
+                    {% endif %}
+                    <div class="row">
+                        {{ form.as_p }}
+					{% comment %} <div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label>Profile pictire</label>
+								{{ form.picture }}
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>Profile category</label>
+								{{ form.category }} 
+							</div>
+						</div>
+                        <div class="col-6">
+							<div class="form-group">
+								<label>Secondary profile category</label>
+								{{ form.secondary_category }} 
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>Contry of residence</label>
+								{{ form.country_of_residence }}
+							</div>
+						</div>
+                        <div class="col-6">
+							<div class="form-group">
+								<label>Current city</label>
+								{{ form.city_of_residence }} 
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>Salary</label>
+								{{ form.salary_expectation }}
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>Resume / CV</label>
+								{{ form.resume_cv }}
+							</div>
+						</div>
+                        <div class="col-6">
+							<div class="form-group">
+								<label>Options</label>
+								{{ form.employment_options }}
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>Skills</label>
+								{{ form.skills }}
+							</div>
+						</div>
+                        <div class="col-6">
+							<div class="form-group">
+								<label>Years of experience</label>
+								{{ form.experience }}
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>English proficiency</label>
+								{{ form.english_level }}
+							</div>
+						</div>
+                        <div class="col-12">
+							<div class="form-group">
+								<label>Work experience</label>
+								{{ form.work_experience }}
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<label>Major accomplishments</label>
+								{{ form.accomplishments }}
+							</div>
+						</div>
+                        <div class="col-12">
+							<div class="form-group">
+								<label>Expectations from employer</label>
+								{{ form.expectations }}
+							</div>
+						</div> {% endcomment %}
+
+						<div class="col-12">
+							<button class="default-btn register" type="submit">
+								Save Changes
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+		<!-- End User Area -->
+
+		<!-- Jquery Min JS -->
+		<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+		<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'assets/js/meanmenu.min.js' %}"></script>
+		<script src="{% static 'assets/js/appear.min.js' %}"></script>
+		<script src="{% static 'assets/js/jarallax.min.js' %}"></script>
+		<script src="{% static 'assets/js/magnific-popup.min.js' %}"></script>
+		<script src="{% static 'assets/js/custom.js' %}"></script>
+	</body>
+</html>

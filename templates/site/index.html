@@ -37,6 +37,7 @@
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Logout</button>
                 </form>
+                <a href="{% url 'profile' %}" class="nav-link"> Profile </a>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover align-middle">
                         <thead class="table-light">
