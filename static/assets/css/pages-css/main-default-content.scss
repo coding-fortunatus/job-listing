@@ -1,0 +1,81 @@
+/* 
+Main Content Text Style
+=====================================================*/ 
+.main-default-content {
+	h1, h2, h3, h4, h5, h6 {
+		margin-bottom: 15px;
+	}
+	h1 {
+		font-size: 30px;
+	}
+	h2 {
+		font-size: 26px;
+	}
+	h3 {
+		font-size: 24px;
+	}
+	h4 {
+		font-size: 22px;
+	}
+	h5 {
+		font-size: 20px;
+	}
+	h6 {
+		font-size: 18px;
+	}
+	.gap-20 {
+		margin-bottom: 30px;
+	}
+	.gap-ml-50 {
+		margin-left: 50px;
+	}
+	ul {
+		padding: 0;
+		list-style-type: none;
+		display: inline-block;
+		margin-bottom: 0;
+		li {
+			position: relative;
+			margin-bottom: 10px;
+			padding-left: 25px;
+			&::before {
+				content: "";
+				position: absolute;
+				top: 6px;
+				left: 0;
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background-color: var(--main-color);
+			}
+			&:last-child {
+				margin-bottom: 0;
+			}
+			i {
+				position: absolute;
+				top: -6px;
+				left: 0;
+				color: var(--main-color);
+				font-size: 25px;
+			}
+		}
+	}
+	ol {
+		padding-left: 18px;
+		li {
+			margin-bottom: 10px;
+			&::marker  {
+				color: var(--main-color);
+			}
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+	a {
+		color: var(--main-color);
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

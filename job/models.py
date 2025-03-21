@@ -74,3 +74,23 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.fullname
+
+
+class Job(models.Model):
+    JOB_TYPE = [
+        ('full_time', 'Full Time'),
+        ('part_time', 'Part Time'),
+        ('contract', 'Contract'),
+        ('remote', 'Remote')]
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    job_type = models.CharField(
+        choices=JOB_TYPE, default='full_time', max_length=20)
+    location = models.CharField(max_length=255)
+    company = models.CharField(max_length=255)
+    salary = models.IntegerField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title, ":", self.company
