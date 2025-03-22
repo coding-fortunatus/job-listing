@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}
+    Post Job Advert
+{% endblock title %}
+{% block content %}
+    {% include "partials/loader.html" %}
+    {% include "partials/navbar.html" %}
+    <!-- Post Job Section Start -->
+    <div class="job-post ptb-100">
+        <div class="container">
+            <form class="job-post-from" method="post">
+                {% csrf_token %}
+                <h2>Fill Up Your Job information</h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger alert-dismissible col-4 offset-4 fade show"
+                             role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            {{ form.title }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Job Category</label>
+                            {{ form.job_category }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            {{ form.company_name }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Company Email</label>
+                            {{ form.company_email }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Company Website (Optional)</label>
+                            {{ form.company_website }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Location</label>
+                            {{ form.location }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Job Type</label>
+                            {{ form.job_type }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Job Tags</label>
+                            {{ form.job_tags }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Salary (Optional)</label>
+                            {{ form.salary }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Experience</label>
+                            {{ form.experience }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Job Description</label>
+                            {{ form.description }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="post-btn">Post A Job</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Post Job Section End -->
+    {% include "partials/footer.html" %}
+    <!-- Footer Section End -->
+{% endblock content %}

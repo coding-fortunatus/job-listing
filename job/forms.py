@@ -78,14 +78,19 @@ class PostJobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = [
-            'title', 'description', 'job_type', 'location',
-            'company', 'salary',
+            'title', 'job_category', 'company_name', 'company_email', 'company_website', 'location', 'job_type', 'job_tags', 'salary', 'experience',
+            'description',
         ]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control'}),
-            'job_type': forms.Select(attrs={'class': 'form-control'}),
+            'job_category': forms.Select(attrs={'class': 'category'}),
+            'company_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'company_email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'company_website': forms.URLInput(attrs={'class': 'form-control'}),
             'location': forms.TextInput(attrs={'class': 'form-control'}),
-            'company': forms.TextInput(attrs={'class': 'form-control'}),
+            'job_type': forms.Select(attrs={'class': 'category'}),
+            'job_tags': forms.TextInput(attrs={'class': 'form-control'}),
             'salary': forms.TextInput(attrs={'class': 'form-control'}),
+            'experience': forms.NumberInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control description-area'}),
         }

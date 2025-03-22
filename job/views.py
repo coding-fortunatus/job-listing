@@ -88,4 +88,4 @@ def post_job(request):
             return redirect('index')
     else:
         form = PostJobForm()
-    return render(request, template_name='site/job.html', context={'form': form})
+    return render(request, template_name='site/post-job.html', context={'form': form})

@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description"
+              content="Jovie - Job Board & Portal for job seekers and employers." />
+        <meta name="keywords"
+              content="jobs, careers, employment, job board, job portal" />
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+        <link rel="stylesheet"
+              href="{% static 'assets/css/owl.carousel.min.css' %}" />
+        <link rel="stylesheet"
+              href="{% static 'assets/css/owl.theme.default.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/boxicon.min.css' %}" />
+        <link rel="stylesheet"
+              href="{% static 'assets/fonts/flaticon/flaticon.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/dark.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" />
+        <title>
+            {% block title %}
+                Jovie Title
+            {% endblock title %}
+            - Job Board & Portal
+        </title>
+        <link rel="icon"
+              type="image/png"
+              href="{% static 'assets/img/favicon.png' %}" />
+    </head>
+    <body>
+        {% block content %}
+            This is the block content from base template
+        {% endblock content %}
+        <!-- Back To Top Start -->
+        <div class="top-btn">
+            <i class="bx bx-chevrons-up bx-fade-up"></i>
+        </div>
+        <!-- Back To Top End -->
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'assets/js/form-validator.min.js' %}"></script>
+        <script src="{% static 'assets/js/contact-form-script.js' %}"></script>
+        <script src="{% static 'assets/js/meanmenu.js' %}"></script>
+        <script src="{% static 'assets/js/custom.js' %}"></script>
+    </body>
+</html>

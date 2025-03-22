@@ -1,0 +1,64 @@
+{% load static %}
+<footer class="footer-area pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <div class="footer-logo">
+                        <a href="{% url 'index' %}">
+                            <img src="{% static 'assets/img/logo.png' %}"
+                                 alt="logo"
+                                 height=""
+                                 width="" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget pl-60">
+                    <h3>For Candidate</h3>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="bx bx-chevrons-right bx-tada"></i>
+                                Account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="bx bx-chevrons-right bx-tada"></i>
+                                Browse Categories
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget pl-60">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li>
+                            <a href="{% url 'index' %}">
+                                <i class="bx bx-chevrons-right bx-tada"></i>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="bx bx-chevrons-right bx-tada"></i>
+                                Job List
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="copyright-text text-center">
+    <p>
+        © Jovie Platform is Proudly Owned by
+        <a href="https://zealaraxtechnologies.com/" target="_blank">Zealarax Technologies</a>
+    </p>
+</div>
+<!-- Footer Section End -->

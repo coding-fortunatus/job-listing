@@ -30,21 +30,30 @@ class User(AbstractUser):
         ('job_seeker', 'Job Seeker'),
     ]
     EMPLOYMENT_OPTIONS = [
+        ('', 'Select Employment Type'),
         ('full_time', 'Full Time'),
         ('part_time', 'Part Time'),
         ('contract', 'Contract'),
-        ('remote', 'Remote')
+        ('freelance', 'Freelance'),
+        ('internship', 'Internship'),
+        ('temporary', 'Temporary'),
+        ('remote', 'Remote'),
+        ('hybrid', 'Hybrid'),
+        ('volunteer', 'Volunteer')
     ]
     CATEGORY_CHOICES = [
         ('', 'Select Category'),
         ('software_development', 'Software Development'),
         ('design', 'Design'),
-        ('marketing', 'Marketing'),
-        ('customer_service', 'Customer Service'),
-        ('finance', 'Finance'),
         ('human_resources', 'Human Resources'),
-        ('healthcare', 'Healthcare'),
         ('education', 'Education'),
+        ('engineering', 'Engineering'),
+        ('data_science', 'Data Science'),
+        ('cybersecurity', 'Cybersecurity'),
+        ('blockchain', 'Blockchain'),
+        ('gaming', 'Gaming'),
+        ('AI_ML', 'AI & Machine Learning'),
+        ('telecommunications', 'Telecommunications'),
         ('other', 'Other')
     ]
     username = None  # Remove username field
@@ -89,20 +98,21 @@ class User(AbstractUser):
 
 
 class Job(models.Model):
-    JOB_TYPE = [
-        ('full_time', 'Full Time'),
-        ('part_time', 'Part Time'),
-        ('contract', 'Contract'),
-        ('remote', 'Remote')]
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
+    job_category = models.CharField(
+        max_length=255, choices=User.CATEGORY_CHOICES, null=True, blank=True)
     job_type = models.CharField(
-        choices=JOB_TYPE, default='full_time', max_length=20)
+        choices=User.EMPLOYMENT_OPTIONS, max_length=20)
+    job_tags = models.CharField(max_length=255)
+    experience = models.IntegerField(null=True, blank=True)
     location = models.CharField(max_length=255)
-    company = models.CharField(max_length=255)
+    company_name = models.CharField(max_length=255, null=True, blank=True)
+    company_email = models.EmailField(max_length=255, null=True, blank=True)
+    company_website = models.URLField(max_length=255, blank=True, null=True)
     salary = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title, ":", self.company
+        return self.title, ":", self.company_name
