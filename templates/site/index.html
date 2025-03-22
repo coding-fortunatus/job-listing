@@ -1,87 +1,130 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-		<!-- Bootstrap Min CSS -->
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/bootstrap.min.css' %}" />
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/meanmenu.min.css' %}" />
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/magnific-popup.min.css' %}" />
-		<link rel="stylesheet" href="{% static '/assets/css/style.css' %}" />
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/responsive.css' %}" />
-
-		<title>Sign-in - Job Portal</title>
-	</head>
-
-	<body>
-		<!-- Start User Area -->
-		<section class="user-area p-5">
-			<div class="user-form-content max-width-600">
-				<h3>Authenticated</h3>
-                <p>Welcome, {{ user.fullname }}</p>
-                <p>Your email is: {{ user.email }}</p>
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Logout</button>
-                </form>
-                <a href="{% url 'profile' %}" class="nav-link"> Profile </a>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Title</th>
-                                <th>category</th>
-                                <th>location</th>
-                                <th>salary</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            {% if jobs %}
-                                {% for job in jobs %}
-                                    <tr  class="table-primary">
-                                        <td scope="row">{{job.title}}</td>
-                                        <td>{{job.job_type.upper}}</td>
-                                        <td>{{job.location}}</td>
-                                        <td>{{job.salary}}</td>
-                                        <td>{{job.user_id}}</td>
-                                        <td>
-                                            <a href="{% url 'post_job' %}" class="btn btn-primary">Apply Now</a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            {% else %}
-                                <tr>
-                                    <td colspan="4">No jobs found</td>
-                                </tr>
-                            {% endif %}
-                        </tbody>
-                    </table>
+{% block title %}
+    Post Job Advert
+{% endblock title %}
+{% block content %}
+    {% include "partials/loader.html" %}
+    {% include "partials/navbar.html" %}
+    <!-- Banner Section Start -->
+    <div class="banner-section">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="banner-content text-center">
+                        <p>Find Jobs, Employment & Career Opportunities</p>
+                        <h1>Drop Resume & Get Your Desire Job!</h1>
+                        <form class="banner-form" method="get">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Keyword:</label>
+                                        <input type="text" class="form-control" name="title" placeholder="Job Title" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail2">Location:</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               name="location"
+                                               placeholder="City or State" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="find-btn">
+                                        Find A Job
+                                        <i class="bx bx-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                
-			</div>
-		</section>
-		<!-- End User Area -->
-
-		<!-- Jquery Min JS -->
-		<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-		<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
-		<script src="{% static 'assets/js/meanmenu.min.js' %}"></script>
-		<script src="{% static 'assets/js/appear.min.js' %}"></script>
-		<script src="{% static 'assets/js/jarallax.min.js' %}"></script>
-		<script src="{% static 'assets/js/magnific-popup.min.js' %}"></script>
-		<script src="{% static 'assets/js/custom.js' %}"></script>
-	</body>
-</html>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Section End -->
+    <!-- Job Section End -->
+    <section class="job-style-two job-list-section pt-100 pb-70">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Jobs You May Be Interested In</h2>
+            </div>
+            <div class="row">
+                {% for job in jobs %}
+                    <div class="col-lg-12">
+                        <div class="job-card-two">
+                            <div class="row align-items-center">
+                                <div class="col-md-1">
+                                    <div class="company-logo">
+                                        <a href="#">
+                                            <img src="{% static 'assets/img/company-logo/6.png' %}" alt="logo" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="job-info">
+                                        <h3>
+                                            <a href="#">{{ job.title }}</a>
+                                        </h3>
+                                        <ul>
+                                            <li>
+                                                <i class="bx bx-briefcase"></i>
+                                                {{ job.job_category }}
+                                            </li>
+                                            <li>
+                                                <i class="bx bx-briefcase"></i>
+                                                ${{ job.salary }}
+                                            </li>
+                                            <li>
+                                                <i class="bx bx-location-plus"></i>
+                                                {{ job.location }}
+                                            </li>
+                                            <li>
+                                                <i class="bx bx-stopwatch"></i>
+                                                {{ job.created_at }}
+                                            </li>
+                                        </ul>
+                                        <span>{{ job.job_type }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="theme-btn text-end">
+                                        <a href="#" class="default-btn">Browse Job</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                            <i class="bx bx-chevrons-left bx-fade-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link active" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="bx bx-chevrons-right bx-fade-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+    <!-- Job Section End -->
+    {% include "partials/footer.html" %}
+    <!-- Footer Section End -->
+{% endblock content %}

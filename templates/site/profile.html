@@ -1,162 +1,168 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/bootstrap.min.css' %}" />
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/meanmenu.min.css' %}" />
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/magnific-popup.min.css' %}" />
-		<link rel="stylesheet" href="{% static '/assets/css/style.css' %}" />
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/responsive.css' %}" />
-
-		<title>Create account - Job Portal</title>
-	</head>
-
-	<body>
-		<!-- Start User Area -->
-		<section class="user-area pt-3">
-			<div class="user-form-content max-width-600">
-				<form class="user-form" method="post" enctype="multipart/form-data">
-					{% csrf_token %}
-					<h3>Create an account</h3>
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>{{ message }}</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+{% block title %}
+    Post Job Advert
+{% endblock title %}
+{% block content %}
+    {% include "partials/loader.html" %}
+    {% include "partials/navbar.html" %}
+    <!-- Account Area Start -->
+    <section class="account-section ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="account-information">
+                        <div class="profile-thumb">
+                            <img src="{% static 'assets/img/default.jpg' %}"
+                                 height="200"
+                                 alt="account holder image" />
+                            <h3>{{ user.fullname }}</h3>
+                            <p>{{ user.position }}</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <a href="#" class="active">
+                                    <i class="bx bx-user"></i>
+                                    My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="bx bx-briefcase"></i>
+                                    Applied Job
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="bx bx-lock-alt"></i>
+                                    Change Password
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}">
+                                    <i class="bx bx-log-out"></i>
+                                    Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="account-details">
+                        <h3>Basic Information</h3>
+                        <form class="basic-info" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Profile Picture</label>
+                                        <input type="file" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Resume or CV</label>
+                                        <input type="file" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Your Name</label>
+                                        <input type="text" class="form-control" placeholder="Your Name" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Your Email</label>
+                                        <input type="email" class="form-control" placeholder="Your Email" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Your Phone</label>
+                                        <input type="number" class="form-control" placeholder="Your Phone" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Job Title</label>
+                                        <input type="text" class="form-control" placeholder="Job Title" />
+                                    </div>
+                                </div>
+                                <h3>Address</h3>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Your Country</label>
+                                        <input type="text" class="form-control" placeholder="Your Country" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Your City</label>
+                                        <input type="text" class="form-control" placeholder="Your City" />
+                                    </div>
+                                </div>
+                                <h3>Other information</h3>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Age</label>
+                                        <input type="number" class="form-control" placeholder="Your Age" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Work Experience</label>
+                                        <input type="number" class="form-control" placeholder="Work Experience" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Language</label>
+                                        <input type="text" class="form-control" placeholder="Language" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Skill</label>
+                                        <input type="text" class="form-control" placeholder="Skills" />
+                                    </div>
+                                </div>
+                                <h3>Social links</h3>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Facebook</label>
+                                        <input type="text" class="form-control" placeholder="www.facebook.com/user" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Twitter</label>
+                                        <input type="number" class="form-control" placeholder="www.twitter.com/user" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Linkedin</label>
+                                        <input type="text" class="form-control" placeholder="www.Linkedin.com/user" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Github</label>
+                                        <input type="text" class="form-control" placeholder="www.Github.com/user" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="account-btn">Save</button>
+                                </div>
                             </div>
-                        {% endfor %}
-                    {% endif %}
-                    {% if user.picture %}
-                        <img src="{{ user.picture.url }}" class="rounded-circle img-fluid" alt="Profile Picture" width="100">
-                    {% else %}
-                        <img src="{% static 'images/default-avatar.jpg' %}" class="rounded-circle img-fluid" alt="Default Profile" width="100">
-                    {% endif %}
-                    <br>
-                    {% if user.resume_cv %}
-                        <p><strong>Resume:</strong> <a href="{{ user.resume_cv.url }}" target="_blank" class="btn btn-primary">Download Resume</a></p>
-                    {% else %}
-                        <p>No resume uploaded</p>
-                    {% endif %}
-                    <div class="row">
-                        {{ form.as_p }}
-					{% comment %} <div class="row">
-						<div class="col-12">
-							<div class="form-group">
-								<label>Profile pictire</label>
-								{{ form.picture }}
-							</div>
-						</div>
-						<div class="col-6">
-							<div class="form-group">
-								<label>Profile category</label>
-								{{ form.category }} 
-							</div>
-						</div>
-                        <div class="col-6">
-							<div class="form-group">
-								<label>Secondary profile category</label>
-								{{ form.secondary_category }} 
-							</div>
-						</div>
-						<div class="col-6">
-							<div class="form-group">
-								<label>Contry of residence</label>
-								{{ form.country_of_residence }}
-							</div>
-						</div>
-                        <div class="col-6">
-							<div class="form-group">
-								<label>Current city</label>
-								{{ form.city_of_residence }} 
-							</div>
-						</div>
-						<div class="col-6">
-							<div class="form-group">
-								<label>Salary</label>
-								{{ form.salary_expectation }}
-							</div>
-						</div>
-						<div class="col-6">
-							<div class="form-group">
-								<label>Resume / CV</label>
-								{{ form.resume_cv }}
-							</div>
-						</div>
-                        <div class="col-6">
-							<div class="form-group">
-								<label>Options</label>
-								{{ form.employment_options }}
-							</div>
-						</div>
-						<div class="col-6">
-							<div class="form-group">
-								<label>Skills</label>
-								{{ form.skills }}
-							</div>
-						</div>
-                        <div class="col-6">
-							<div class="form-group">
-								<label>Years of experience</label>
-								{{ form.experience }}
-							</div>
-						</div>
-						<div class="col-6">
-							<div class="form-group">
-								<label>English proficiency</label>
-								{{ form.english_level }}
-							</div>
-						</div>
-                        <div class="col-12">
-							<div class="form-group">
-								<label>Work experience</label>
-								{{ form.work_experience }}
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="form-group">
-								<label>Major accomplishments</label>
-								{{ form.accomplishments }}
-							</div>
-						</div>
-                        <div class="col-12">
-							<div class="form-group">
-								<label>Expectations from employer</label>
-								{{ form.expectations }}
-							</div>
-						</div> {% endcomment %}
-
-						<div class="col-12">
-							<button class="default-btn register" type="submit">
-								Save Changes
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</section>
-		<!-- End User Area -->
-
-		<!-- Jquery Min JS -->
-		<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-		<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
-		<script src="{% static 'assets/js/meanmenu.min.js' %}"></script>
-		<script src="{% static 'assets/js/appear.min.js' %}"></script>
-		<script src="{% static 'assets/js/jarallax.min.js' %}"></script>
-		<script src="{% static 'assets/js/magnific-popup.min.js' %}"></script>
-		<script src="{% static 'assets/js/custom.js' %}"></script>
-	</body>
-</html>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Account Area End -->
+    {% include "partials/footer.html" %}
+    <!-- Footer Section End -->
+{% endblock content %}

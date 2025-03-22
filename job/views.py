@@ -10,7 +10,7 @@ from .models import Job
 User = get_user_model()
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def index(request):
     jobs = Job.objects.all()
     return render(request, template_name='site/index.html', context={'jobs': jobs})
