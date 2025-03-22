@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from .models import Job
 
 User = get_user_model()
 
@@ -47,13 +48,6 @@ class CustomUserRegistrationForm(forms.Form):
 
 
 class UpdateUserProfileForm(forms.ModelForm):
-    EMPLOYMENT_OPTIONS = [
-        ('full_time', 'Full Time'),
-        ('part_time', 'Part Time'),
-        ('contract', 'Contract'),
-        ('remote', 'Remote')
-    ]
-
     class Meta:
         model = User  # Use your actual User model
         fields = [
@@ -77,4 +71,21 @@ class UpdateUserProfileForm(forms.ModelForm):
             'accomplishments': forms.Textarea(attrs={'class': 'form-control'}),
             'expectations': forms.Textarea(attrs={'class': 'form-control'}),
             'employment_options': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+
+class PostJobForm(forms.ModelForm):
+    class Meta:
+        model = Job
+        fields = [
+            'title', 'description', 'job_type', 'location',
+            'company', 'salary',
+        ]
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'job_type': forms.Select(attrs={'class': 'form-control'}),
+            'location': forms.TextInput(attrs={'class': 'form-control'}),
+            'company': forms.TextInput(attrs={'class': 'form-control'}),
+            'salary': forms.TextInput(attrs={'class': 'form-control'}),
         }

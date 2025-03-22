@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+		<link
+			rel="stylesheet"
+			href="{% static '/assets/css/bootstrap.min.css' %}" />
+		<link
+			rel="stylesheet"
+			href="{% static '/assets/css/meanmenu.min.css' %}" />
+		<link
+			rel="stylesheet"
+			href="{% static '/assets/css/magnific-popup.min.css' %}" />
+		<link rel="stylesheet" href="{% static '/assets/css/style.css' %}" />
+		<link
+			rel="stylesheet"
+			href="{% static '/assets/css/responsive.css' %}" />
+
+		<title>Post new job - Job Portal</title>
+	</head>
+
+	<body>
+		<!-- Start User Area -->
+		<section class="user-area pt-3">
+			<div class="user-form-content max-width-600">
+				<form class="user-form" method="post">
+					{% csrf_token %}
+					<h3>Post a Job Advert</h3>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="row">
+                        {{ form.as_p }}
+                        <div class="col-12">
+							<button class="default-btn register" type="submit">
+								Publish Job
+							</button>
+						</div>
+                    </div>
+				</form>
+			</div>
+		</section>
+		<!-- End User Area -->
+
+		<!-- Jquery Min JS -->
+		<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+		<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'assets/js/meanmenu.min.js' %}"></script>
+		<script src="{% static 'assets/js/appear.min.js' %}"></script>
+		<script src="{% static 'assets/js/jarallax.min.js' %}"></script>
+		<script src="{% static 'assets/js/magnific-popup.min.js' %}"></script>
+		<script src="{% static 'assets/js/custom.js' %}"></script>
+	</body>
+</html>

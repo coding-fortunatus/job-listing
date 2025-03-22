@@ -52,10 +52,14 @@
                             {% if jobs %}
                                 {% for job in jobs %}
                                     <tr  class="table-primary">
-                                        <td scope="row">job.title</td>
-                                        <td>job.category</td>
-                                        <td>job.location</td>
-                                        <td>job.salary</td>
+                                        <td scope="row">{{job.title}}</td>
+                                        <td>{{job.job_type.upper}}</td>
+                                        <td>{{job.location}}</td>
+                                        <td>{{job.salary}}</td>
+                                        <td>{{job.user_id}}</td>
+                                        <td>
+                                            <a href="{% url 'post_job' %}" class="btn btn-primary">Apply Now</a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             {% else %}

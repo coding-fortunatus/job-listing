@@ -1,7 +1,7 @@
 # from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
-from .forms import CustomUserRegistrationForm, UpdateUserProfileForm
+from .forms import CustomUserRegistrationForm, UpdateUserProfileForm, PostJobForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -10,6 +10,7 @@ from .models import Job
 User = get_user_model()
 
 
+@login_required(login_url='login')
 def index(request):
     jobs = Job.objects.all()
     return render(request, template_name='site/index.html', context={'jobs': jobs})
@@ -57,6 +58,12 @@ def user_login(request):
 
 
 @login_required(login_url='login')
+def user_logout(request):
+    logout(request)
+    return redirect('login')
+
+
+@login_required(login_url='login')
 def profile(request):
     if request.method == 'POST':
         form = UpdateUserProfileForm(
@@ -71,6 +78,14 @@ def profile(request):
 
 
 @login_required(login_url='login')
-def user_logout(request):
-    logout(request)
-    return redirect('login')
+def post_job(request):
+    if request.method == 'POST':
+        form = PostJobForm(request.POST)
+        form.instance.user_id = request.user
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Job posted successfully")
+            return redirect('index')
+    else:
+        form = PostJobForm()
+    return render(request, template_name='site/job.html', context={'form': form})
