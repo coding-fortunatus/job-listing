@@ -51,15 +51,19 @@ class UpdateUserProfileForm(forms.ModelForm):
     class Meta:
         model = User  # Use your actual User model
         fields = [
+            'fullname', 'position', 'phone',
             'picture', 'category', 'secondary_category', 'country_of_residence',
             'city_of_residence', 'salary_expectation', 'resume_cv', 'skills',
             'experience', 'english_level', 'work_experience', 'accomplishments',
             'expectations', 'employment_options'
         ]
         widgets = {
+            'fullname': forms.TextInput(attrs={'class': 'form-control'}),
+            'position': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
             'picture': forms.FileInput(attrs={'class': 'form-control', 'accept': 'image/*'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
-            'secondary_category': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'category'}),
+            'secondary_category': forms.Select(attrs={'class': 'category'}),
             'country_of_residence': forms.TextInput(attrs={'class': 'form-control'}),
             'city_of_residence': forms.TextInput(attrs={'class': 'form-control'}),
             'salary_expectation': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
@@ -67,9 +71,9 @@ class UpdateUserProfileForm(forms.ModelForm):
             'skills': forms.Textarea(attrs={'class': 'form-control'}),
             'experience': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
             'english_level': forms.TextInput(attrs={'class': 'form-control'}),
-            'work_experience': forms.Textarea(attrs={'class': 'form-control'}),
-            'accomplishments': forms.Textarea(attrs={'class': 'form-control'}),
-            'expectations': forms.Textarea(attrs={'class': 'form-control'}),
+            'work_experience': forms.Textarea(attrs={'class': 'form-control description-area'}),
+            'accomplishments': forms.Textarea(attrs={'class': 'form-control description-area'}),
+            'expectations': forms.Textarea(attrs={'class': 'form-control description-area'}),
             'employment_options': forms.Select(attrs={'class': 'form-control'}),
         }
 

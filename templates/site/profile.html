@@ -13,11 +13,19 @@
                 <div class="col-md-4">
                     <div class="account-information">
                         <div class="profile-thumb">
-                            <img src="{% static 'assets/img/default.jpg' %}"
-                                 height="200"
-                                 alt="account holder image" />
-                            <h3>{{ user.fullname }}</h3>
-                            <p>{{ user.position }}</p>
+                            {% if user.picture %}
+                                <img src="{{ user.picture.url }}"
+                                     alt="Profile Picture"
+                                     width="200"
+                                     height="200">
+                            {% else %}
+                                <img src="{% static 'assets/img/default.jpg' %}"
+                                     height="200"
+                                     alt="Profile Picture" />
+                            {% endif %}
+                            <h3>{{ user.fullname.upper }}</h3>
+                            <h6>{{ user.position.upper }}</h6>
+                            <p>{{ user.email }}</p>
                         </div>
                         <ul>
                             <li>
@@ -50,81 +58,117 @@
                 <div class="col-md-8">
                     <div class="account-details">
                         <h3>Basic Information</h3>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible col-6 offset-3 fade show"
+                                     role="alert">
+                                    <strong>{{ message }}</strong>
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <form class="basic-info" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Profile Picture</label>
-                                        <input type="file" class="form-control" />
+                                        {{ form.picture }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Resume or CV</label>
-                                        <input type="file" class="form-control" />
+                                        {{ form.resume_cv }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Your Name</label>
-                                        <input type="text" class="form-control" placeholder="Your Name" />
+                                        <label>Full Name</label>
+                                        {{ form.fullname }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Your Email</label>
-                                        <input type="email" class="form-control" placeholder="Your Email" />
+                                        <label>Job Position</label>
+                                        {{ form.position }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Your Phone</label>
-                                        <input type="number" class="form-control" placeholder="Your Phone" />
+                                        <label>Phone Number</label>
+                                        {{ form.phone }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Job Title</label>
-                                        <input type="text" class="form-control" placeholder="Job Title" />
+                                        <label>Primary Category</label>
+                                        {{ form.category }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Secondary Category</label>
+                                        {{ form.secondary_category }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Mode of Work</label>
+                                        {{ form.employment_options }}
                                     </div>
                                 </div>
                                 <h3>Address</h3>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Your Country</label>
-                                        <input type="text" class="form-control" placeholder="Your Country" />
+                                        {{ form.country_of_residence }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Your City</label>
-                                        <input type="text" class="form-control" placeholder="Your City" />
+                                        {{ form.city_of_residence }}
                                     </div>
                                 </div>
                                 <h3>Other information</h3>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Age</label>
-                                        <input type="number" class="form-control" placeholder="Your Age" />
+                                        <label>Salary</label>
+                                        {{ form.salary_expectation }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Years of Experience</label>
+                                        {{ form.experience }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Work Experience</label>
-                                        <input type="number" class="form-control" placeholder="Work Experience" />
+                                        {{ form.work_experience }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Language</label>
-                                        <input type="text" class="form-control" placeholder="Language" />
+                                        <label>Accomplishment(s)</label>
+                                        {{ form.accomplishments }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Skill</label>
-                                        <input type="text" class="form-control" placeholder="Skills" />
+                                        <label>Skills</label>
+                                        {{ form.skills }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Expectation from Employer</label>
+                                        {{ form.expectations }}
                                     </div>
                                 </div>
                                 <h3>Social links</h3>
