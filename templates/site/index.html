@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block title %}
     All Adverts
 {% endblock title %}
@@ -80,11 +81,11 @@
                                             <ul>
                                                 <li>
                                                     <i class="bx bx-briefcase"></i>
-                                                    {{ job.job_category }}
+                                                    {{ job.get_job_category_display }}
                                                 </li>
                                                 <li>
                                                     <i class="bx bx-briefcase"></i>
-                                                    ${{ job.salary }}
+                                                    ${{ job.salary|intcomma }}
                                                 </li>
                                                 <li>
                                                     <i class="bx bx-location-plus"></i>
@@ -95,7 +96,7 @@
                                                     {{ job.created_at|timesince }} ago
                                                 </li>
                                             </ul>
-                                            <span>{{ job.job_type }}</span>
+                                            <span>{{ job.get_job_type_display }}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
