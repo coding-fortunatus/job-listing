@@ -12,7 +12,18 @@ User = get_user_model()
 
 # @login_required(login_url='login')
 def index(request):
-    jobs = Job.objects.all()
+    if request.method == 'GET':
+        title = request.GET.get('title')
+        location = request.GET.get('location')
+        if title and location:
+            jobs = Job.objects.filter(
+                title__icontains=title, location__icontains=location)
+        elif title:
+            jobs = Job.objects.filter(title__icontains=title)
+        elif location:
+            jobs = Job.objects.filter(location__icontains=location)
+        else:
+            jobs = Job.objects.all()
     return render(request, template_name='site/index.html', context={'jobs': jobs})
 
 

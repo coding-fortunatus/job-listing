@@ -18,8 +18,12 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Keyword:</label>
-                                        <input type="text" class="form-control" name="title" placeholder="Job Title" />
+                                        <label for="exampleInputEmail1">Job Title:</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               value="{{ request.GET.title }}"
+                                               name="title"
+                                               placeholder="Data Scientist" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -28,7 +32,8 @@
                                         <input type="text"
                                                class="form-control"
                                                name="location"
-                                               placeholder="City or State" />
+                                               value="{{ request.GET.location }}"
+                                               placeholder="Nigeria" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -52,76 +57,95 @@
                 <h2>Jobs You May Be Interested In</h2>
             </div>
             <div class="row">
-                {% for job in jobs %}
+                {% if jobs %}
+                    {% for job in jobs %}
+                        <div class="col-lg-12">
+                            <div class="job-card-two">
+                                <div class="row align-items-center">
+                                    <div class="col-md-1">
+                                        <div class="company-logo">
+                                            <a href="#">
+                                                <img src="{% static 'assets/img/company-logo/6.png' %}"
+                                                     height=""
+                                                     width=""
+                                                     alt="logo" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="job-info">
+                                            <h3>
+                                                <a href="#">{{ job.title }}</a>
+                                            </h3>
+                                            <ul>
+                                                <li>
+                                                    <i class="bx bx-briefcase"></i>
+                                                    {{ job.job_category }}
+                                                </li>
+                                                <li>
+                                                    <i class="bx bx-briefcase"></i>
+                                                    ${{ job.salary }}
+                                                </li>
+                                                <li>
+                                                    <i class="bx bx-location-plus"></i>
+                                                    {{ job.location }}
+                                                </li>
+                                                <li>
+                                                    <i class="bx bx-stopwatch"></i>
+                                                    {{ job.created_at|timesince }} ago
+                                                </li>
+                                            </ul>
+                                            <span>{{ job.job_type }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="theme-btn text-end">
+                                            <a href="" class="default-btn">Browse Job</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                    <i class="bx bx-chevrons-left bx-fade-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link active" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <i class="bx bx-chevrons-right bx-fade-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                {% else %}
                     <div class="col-lg-12">
                         <div class="job-card-two">
                             <div class="row align-items-center">
-                                <div class="col-md-1">
-                                    <div class="company-logo">
-                                        <a href="#">
-                                            <img src="{% static 'assets/img/company-logo/6.png' %}" alt="logo" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
+                                <div class="col-md-12 text-center">
                                     <div class="job-info">
                                         <h3>
-                                            <a href="#">{{ job.title }}</a>
+                                            <a href="#">No jobs found</a>
                                         </h3>
-                                        <ul>
-                                            <li>
-                                                <i class="bx bx-briefcase"></i>
-                                                {{ job.job_category }}
-                                            </li>
-                                            <li>
-                                                <i class="bx bx-briefcase"></i>
-                                                ${{ job.salary }}
-                                            </li>
-                                            <li>
-                                                <i class="bx bx-location-plus"></i>
-                                                {{ job.location }}
-                                            </li>
-                                            <li>
-                                                <i class="bx bx-stopwatch"></i>
-                                                {{ job.created_at|timesince }} ago
-                                            </li>
-                                        </ul>
-                                        <span>{{ job.job_type }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="theme-btn text-end">
-                                        <a href="#" class="default-btn">Browse Job</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                {% endif %}
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                            <i class="bx bx-chevrons-left bx-fade-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link active" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            <i class="bx bx-chevrons-right bx-fade-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </section>
     <!-- Job Section End -->
