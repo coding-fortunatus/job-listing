@@ -27,6 +27,12 @@ def index(request):
     return render(request, template_name='site/index.html', context={'jobs': jobs})
 
 
+def job_details(request, job_id):
+    job = Job.objects.get(id=job_id)
+    tags = job.job_tags.split(',')
+    return render(request, template_name='site/job-details.html', context={'job': job, 'tags': tags})
+
+
 def register(request):
     if request.user.is_authenticated:
         return redirect("index")

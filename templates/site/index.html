@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    Post Job Advert
+    All Adverts
 {% endblock title %}
 {% block content %}
     {% include "partials/loader.html" %}
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="theme-btn text-end">
-                                            <a href="" class="default-btn">Browse Job</a>
+                                            <a href="{% url 'job_details' job.id %}" class="default-btn">Browse Job</a>
                                         </div>
                                     </div>
                                 </div>
