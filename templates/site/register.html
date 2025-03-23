@@ -1,122 +1,95 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/bootstrap.min.css' %}" />
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/meanmenu.min.css' %}" />
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/magnific-popup.min.css' %}" />
-		<link rel="stylesheet" href="{% static '/assets/css/style.css' %}" />
-		<link
-			rel="stylesheet"
-			href="{% static '/assets/css/responsive.css' %}" />
-
-		<title>Create account - Job Portal</title>
-	</head>
-
-	<body>
-		<!-- Start User Area -->
-		<section class="user-area pt-3">
-			<div class="user-form-content max-width-600">
-				<form class="user-form" method="post">
-					{% csrf_token %}
-					<h3>Create an account</h3>
-                    {% if form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            {% for error in form.non_field_errors %}
-                                <p>{{ error }}</p>
-                            {% endfor %}
+{% extends "base.html" %}
+{% block title %}
+    Account Sign-in
+{% endblock title %}
+{% block content %}
+    {% include "partials/loader.html" %}
+    <!-- Sign up Section Start -->
+    <div class="signup-section ptb-100">
+        <div class="container">
+            <div class="signup-title text-center">
+                <h2>Sign Up</h2>
+                <div class="create-btn text-center">
+                    <p>
+                        Have an Account?
+                        <a href="{% url 'login' %}">
+                            Sign In
+                            <i class="bx bx-chevrons-right bx-fade-right"></i>
+                        </a>
+                    </p>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger alert-dismissible col-4 offset-4 fade show"
+                             role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                         </div>
-                    {% endif %}
-					<div class="row">
-						<div class="col-12">
-							<div class="form-group">
-								<label>Full Name</label>
-								{{ form.fullname }}
-							</div>
-						</div>
-
-						<div class="col-6">
-							<div class="form-group">
-								<label>Email</label>
-								{{ form.email }} 
-                                {% if form.email.errors %} 
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="signup-form" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>Full Name</label>
+                                {{ form.fullname }}
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Email</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
                                     <div class="text-danger">
-                                        {% for error in form.email.errors %} <small> {{ error }} </small> {% endfor %}
+                                        {% for error in form.email.errors %}<small>{{ error }}</small>{% endfor %}
                                     </div>
                                 {% endif %}
-							</div>
-						</div>
-
-						<div class="col-6">
-							<div class="form-group">
-								<label>Phone Number</label>
-								{{ form.phone }}
-							</div>
-						</div>
-
-						<div class="col-6">
-							<div class="form-group">
-								<label>Password</label>
-								{{ form.password }}
-							</div>
-						</div>
-
-						<div class="col-6">
-							<div class="form-group">
-								<label>Confirm Password</label>
-								{{ form.confirm_password }}
-                                {% if form.confirm_password.errors %} 
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Phone number</label>
+                                {{ form.phone }}
+                            </div>
+                            <!-- Password section -->
+                            <div class="form-group col-6">
+                                <label>Password</label>
+                                {{ form.password }}
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Confirm Password</label>
+                                {{ form.confirm_password }}
+                                {% if form.confirm_password.errors %}
                                     <div class="text-danger">
-                                        {% for error in form.confirm_password.errors %} <small> {{ error }} </small> {% endfor %}
+                                        {% for error in form.confirm_password.errors %}<small>{{ error }}</small>{% endfor %}
                                     </div>
                                 {% endif %}
-							</div>
-						</div>
-
-						<div class="col-12">
-							<div class="form-group">
-								<label>Job title or Position</label>
-								{{ form.position }}
-							</div>
-						</div>
-
-						<div class="col-12">
-							<button class="default-btn register" type="submit">
-								Register now
-							</button>
-						</div>
-
-						<div class="col-12">
-							<p class="create">
-								Already have an account?
-								<a href="{% url 'login' %}">Log in</a>
-							</p>
-						</div>
-					</div>
-				</form>
-			</div>
-		</section>
-		<!-- End User Area -->
-
-		<!-- Jquery Min JS -->
-		<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-		<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
-		<script src="{% static 'assets/js/meanmenu.min.js' %}"></script>
-		<script src="{% static 'assets/js/appear.min.js' %}"></script>
-		<script src="{% static 'assets/js/jarallax.min.js' %}"></script>
-		<script src="{% static 'assets/js/magnific-popup.min.js' %}"></script>
-		<script src="{% static 'assets/js/custom.js' %}"></script>
-	</body>
-</html>
+                            </div>
+                            <div class="form-group form-check col-6">
+                                <label>Account Type</label>
+                                {% for radio in form.role %}
+                                    <div class="form-check">
+                                        {{ radio.tag }}  {# This renders the radio input #}
+                                        <label class="form-check-label" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="signup-btn text-center">
+                            <button type="submit">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sign Up Section End -->
+    <div class="copyright-text text-center">
+        <p>
+            © Jovie Platform is Proudly Owned by
+            <a href="https://zealaraxtechnologies.com/" target="_blank">Zealarax Technologies</a>
+        </p>
+    </div>
+{% endblock content %}

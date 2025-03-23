@@ -12,10 +12,12 @@ class CustomUserRegistrationForm(forms.Form):
         attrs={'placeholder': 'John Doe', 'class': 'form-control', 'autofill': 'off'}))
     phone = forms.CharField(max_length=15, required=True, widget=forms.TextInput(
         attrs={'placeholder': '+2348169418576', 'class': 'form-control', 'autofill': 'off'}))
-    position = forms.CharField(max_length=255, required=True, widget=forms.TextInput(
-        attrs={'placeholder': 'Senior Software Engineer', 'class': 'form-control', 'autofill': 'off'}))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'autofill': 'off'}), required=True)
+    role = forms.ChoiceField(
+        choices=[('employer', 'Employer'), ('candidate', 'Candidate')],
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
+    )
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(attrs={"class": "form-control", 'autofill': 'off'}), required=True)
 
@@ -39,11 +41,11 @@ class CustomUserRegistrationForm(forms.Form):
         email = self.cleaned_data['email']
         fullname = self.cleaned_data['fullname']
         phone = self.cleaned_data['phone']
-        position = self.cleaned_data['position']
+        role = self.cleaned_data['role']
         password = self.cleaned_data['password']
 
         user = User.objects.create_user(
-            email=email, fullname=fullname, phone=phone, position=position, password=password)
+            email=email, fullname=fullname, phone=phone, role=role, password=password)
         return user
 
 

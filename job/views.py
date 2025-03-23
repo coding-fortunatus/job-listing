@@ -17,12 +17,14 @@ def index(request):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect("index")
     if request.method == 'POST':
         form = CustomUserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)  # Automatically log in the user
-            redirect('login')  # Redirect to homepage
+            redirect('index')  # Redirect to homepage
     else:
         form = CustomUserRegistrationForm()
     return render(request, template_name='site/register.html', context={'form': form})

@@ -27,7 +27,7 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractUser):
     ROLE_CHOICES = [
         ('employer', 'Employer'),
-        ('job_seeker', 'Job Seeker'),
+        ('candidate', 'Candidate'),
     ]
     EMPLOYMENT_OPTIONS = [
         ('', 'Select Employment Type'),

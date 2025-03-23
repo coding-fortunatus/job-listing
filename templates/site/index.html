@@ -83,7 +83,7 @@
                                             </li>
                                             <li>
                                                 <i class="bx bx-stopwatch"></i>
-                                                {{ job.created_at }}
+                                                {{ job.created_at|timesince }} ago
                                             </li>
                                         </ul>
                                         <span>{{ job.job_type }}</span>
