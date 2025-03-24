@@ -13,6 +13,18 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-info alert-dismissible col-6 offset-3 fade show"
+                                     role="alert">
+                                    <strong>{{ message }}</strong>
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <div class="col-lg-12">
                             <div class="job-details-text">
                                 <div class="job-card">
@@ -136,7 +148,7 @@
                                     </div>
                                 </div>
                                 <div class="theme-btn">
-                                    <a href="#" class="default-btn">Apply Now</a>
+                                    <a href="{% url 'apply' job.id %}" class="default-btn">Apply Now</a>
                                 </div>
                             </div>
                         </div>

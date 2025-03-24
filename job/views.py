@@ -5,7 +5,7 @@ from .forms import CustomUserRegistrationForm, UpdateUserProfileForm, PostJobFor
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from .models import Job
+from .models import Job, Application
 
 User = get_user_model()
 
@@ -39,6 +39,29 @@ def job_details(request, job_id):
     requirements = [req.strip()
                     for req in job.requirements.split("\n") if req.strip()]
     return render(request, template_name='site/job-details.html', context={'job': job, 'tags': tags, 'requirements': requirements})
+
+
+def apply(request, job_id):
+    jobTo = Job.objects.get(id=job_id)
+    userResume = request.user.resume_cv.name.replace('resumes/', '')
+
+    if request.method == "POST":
+        # Check if the user has already applied
+        if Application.objects.filter(user=request.user, job=jobTo).exists():
+            messages.warning(request, "You have already applied for this job.")
+            return redirect('job_details', job_id=job_id)
+
+        # Get form data
+        cover = request.POST.get('message', '').strip()
+        resume = request.user.resume_cv
+        user = request.user
+
+        # Save the application
+        Application.objects.create(
+            user=user, job=jobTo, cover=cover, resume=resume)
+        messages.success(request, "Application submitted successfully.")
+        return redirect('apply', job_id=job_id)
+    return render(request, template_name='site/apply.html', context={'job': jobTo, 'resume': userResume})
 
 
 def register(request):

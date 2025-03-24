@@ -21,9 +21,17 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-1">
                                         <div class="company-logo">
-                                            <a href="#">
-                                                <img src="{% static 'assets/img/company-logo/6.png' %}"  alt="logo" />
-                                            </a>
+                                            {% if job.user_id.company_logo %}
+                                                <img src="{{ job.user_id.company_logo.url }}"
+                                                     height=""
+                                                     width=""
+                                                     alt="logo">
+                                            {% else %}
+                                                <img src="{% static 'assets/img/company-logo/1.png' %}"
+                                                     height=""
+                                                     width=""
+                                                     alt="logo">
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <div class="col-md-8">

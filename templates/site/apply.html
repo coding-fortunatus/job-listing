@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}
+    Submit Job Application
+{% endblock title %}
+{% block content %}
+    {% include "partials/loader.html" %}
+    {% include "partials/navbar.html" %}
+    <!-- Post Job Section Start -->
+    <div class="job-post ptb-100">
+        <div class="container">
+            <form class="job-post-from" method="post">
+                {% csrf_token %}
+                <h2>Fill Your Job Application</h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger alert-dismissible col-4 offset-4 fade show"
+                             role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-8 offset-2">
+                        <div class="form-group">
+                            <label>Why should you be considered for this job?</label>
+                            <textarea name="message"
+                                      class="form-control description-area"
+                                      required
+                                      placeholder="Write Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>User Resume or CV</label>
+                            <br>
+                            <a href="{{ user.resume_cv.url }}"
+                               target="__blank"
+                               class="btn btn-outline-success">{{ resume }}</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 text-center">
+                        <button type="submit" class="post-btn">Send Message</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Post Job Section End -->
+    {% include "partials/footer.html" %}
+    <!-- Footer Section End -->
+{% endblock content %}

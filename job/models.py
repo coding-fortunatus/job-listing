@@ -120,3 +120,14 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title, ":", self.company_name
+
+
+class Application(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    cover = models.TextField()
+    resume = models.FileField(upload_to='applications/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.fullname, ":", self.job.title
