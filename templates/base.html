@@ -18,11 +18,12 @@
         <link rel="stylesheet" href="{% static 'assets/css/boxicon.min.css' %}" />
         <link rel="stylesheet"
               href="{% static 'assets/fonts/flaticon/flaticon.css' %}" />
-        <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" />
+        {% comment %} <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" /> {% endcomment %}
         <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}" />
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
         <link rel="stylesheet" href="{% static 'assets/css/dark.css' %}" />
         <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/select2.min.css' %}" />
         <title>
             {% block title %}
                 Jovie Title
@@ -45,12 +46,24 @@
         <script src="{% static 'assets/js/jquery.min.js' %}"></script>
         <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
         <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
-        <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+        <script src="{% static 'assets/js/select2.min.js' %}"></script>
+        {% comment %} <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script> {% endcomment %}
         <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
         <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
         <script src="{% static 'assets/js/form-validator.min.js' %}"></script>
         <script src="{% static 'assets/js/contact-form-script.js' %}"></script>
         <script src="{% static 'assets/js/meanmenu.js' %}"></script>
         <script src="{% static 'assets/js/custom.js' %}"></script>
+        <script>
+        $(document).ready(function() {
+            $('.category').select2({
+                placeholder: "Select a job category",  // Optional placeholder
+                allowClear: true,  // Enables clearing the selection
+                width: '100%',  // Ensures full width
+                dropdownAutoWidth: true,  // Auto width dropdown
+                minimumResultsForSearch: 0  // Enables search always
+            });
+        });
+        </script>
     </body>
 </html>

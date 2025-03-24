@@ -76,7 +76,7 @@ class UpdateUserProfileForm(forms.ModelForm):
             'work_experience': forms.Textarea(attrs={'class': 'form-control description-area'}),
             'accomplishments': forms.Textarea(attrs={'class': 'form-control description-area'}),
             'expectations': forms.Textarea(attrs={'class': 'form-control description-area'}),
-            'employment_options': forms.Select(attrs={'class': 'form-control'}),
+            'employment_options': forms.Select(attrs={'class': 'category'}),
         }
 
 
