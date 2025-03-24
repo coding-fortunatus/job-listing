@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load static %}
+{% block title %}
+    Recommended Jobs
+{% endblock title %}
+{% block content %}
+    {% include "partials/loader.html" %}
+    {% include "partials/navbar.html" %}
+    <!-- Job Section End -->
+    <section class="job-style-two job-list-section pt-100 pb-70">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Jobs Recommended For You</h2>
+            </div>
+            <div class="row">
+                {% if jobs %}
+                    {% for job in jobs %}
+                        <div class="col-lg-12">
+                            <div class="job-card-two">
+                                <div class="row align-items-center">
+                                    <div class="col-md-1">
+                                        <div class="company-logo">
+                                            <a href="#">
+                                                <img src="{% static 'assets/img/company-logo/6.png' %}"  alt="logo" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="job-info">
+                                            <h3>
+                                                <a href="#">{{ job.title }}</a>
+                                            </h3>
+                                            <ul>
+                                                <li>
+                                                    <i class="bx bx-briefcase"></i>
+                                                    {{ job.get_job_category_display }}
+                                                </li>
+                                                <li>
+                                                    <i class="bx bx-briefcase"></i>
+                                                    ${{ job.salary|intcomma }}
+                                                </li>
+                                                <li>
+                                                    <i class="bx bx-location-plus"></i>
+                                                    {{ job.country }}, {{ job.city }}
+                                                </li>
+                                                <li>
+                                                    <i class="bx bx-stopwatch"></i>
+                                                    {{ job.created_at|timesince }} ago
+                                                </li>
+                                            </ul>
+                                            <span>{{ job.get_job_type_display }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="theme-btn text-end">
+                                            <a href="{% url 'job_details' job.id %}" class="default-btn">Browse Job</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-lg-12">
+                        <div class="job-card-two">
+                            <div class="row align-items-center">
+                                <div class="col-md-12 text-center">
+                                    <div class="job-info">
+                                        <h3>
+                                            <a>No job recommendation for you check back later</a>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- Job Section End -->
+    {% include "partials/footer.html" %}
+    <!-- Footer Section End -->
+{% endblock content %}

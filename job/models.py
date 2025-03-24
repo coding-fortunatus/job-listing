@@ -77,6 +77,8 @@ class User(AbstractUser):
     salary_expectation = models.IntegerField(blank=True, null=True)
     resume_cv = models.FileField(upload_to='resumes/', blank=True, null=True)
     skills = models.TextField(blank=True, null=True)
+    company_logo = models.ImageField(
+        upload_to='companies/', blank=True, null=True)
     experience = models.IntegerField(
         blank=True, null=True)
     english_level = models.CharField(
@@ -101,13 +103,15 @@ class Job(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
+    requirements = models.TextField(null=True, blank=True)
     job_category = models.CharField(
         max_length=255, choices=User.CATEGORY_CHOICES, null=True, blank=True)
     job_type = models.CharField(
         choices=User.EMPLOYMENT_OPTIONS, max_length=20)
     job_tags = models.CharField(max_length=255)
     experience = models.IntegerField(null=True, blank=True)
-    location = models.CharField(max_length=255)
+    country = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True, blank=True)
     company_name = models.CharField(max_length=255, null=True, blank=True)
     company_email = models.EmailField(max_length=255, null=True, blank=True)
     company_website = models.URLField(max_length=255, blank=True, null=True)

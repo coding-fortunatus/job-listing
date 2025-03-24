@@ -63,6 +63,7 @@ class UpdateUserProfileForm(forms.ModelForm):
             'fullname': forms.TextInput(attrs={'class': 'form-control'}),
             'position': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'company_logo': forms.FileInput(attrs={'class': 'form-control', 'accept': 'image/*'}),
             'picture': forms.FileInput(attrs={'class': 'form-control', 'accept': 'image/*'}),
             'category': forms.Select(attrs={'class': 'category'}),
             'secondary_category': forms.Select(attrs={'class': 'category'}),
@@ -84,7 +85,7 @@ class PostJobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = [
-            'title', 'job_category', 'company_name', 'company_email', 'company_website', 'location', 'job_type', 'job_tags', 'salary', 'experience',
+            'title', 'job_category', 'company_name', 'company_email', 'company_website', 'city', 'country', 'job_type', 'job_tags', 'salary', 'experience',
             'description',
         ]
         widgets = {
@@ -93,7 +94,8 @@ class PostJobForm(forms.ModelForm):
             'company_name': forms.TextInput(attrs={'class': 'form-control'}),
             'company_email': forms.EmailInput(attrs={'class': 'form-control'}),
             'company_website': forms.URLInput(attrs={'class': 'form-control'}),
-            'location': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'country': forms.TextInput(attrs={'class': 'form-control'}),
             'job_type': forms.Select(attrs={'class': 'category'}),
             'job_tags': forms.TextInput(attrs={'class': 'form-control'}),
             'salary': forms.TextInput(attrs={'class': 'form-control'}),

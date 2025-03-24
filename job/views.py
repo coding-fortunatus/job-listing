@@ -27,10 +27,18 @@ def index(request):
     return render(request, template_name='site/index.html', context={'jobs': jobs})
 
 
+@login_required(login_url='login')
+def recommended_jobs(request):
+    jobs = Job.objects.filter(job_tags__icontains=request.user.category)
+    return render(request, template_name='site/recommend.html', context={'jobs': jobs})
+
+
 def job_details(request, job_id):
     job = Job.objects.get(id=job_id)
     tags = job.job_tags.split(',')
-    return render(request, template_name='site/job-details.html', context={'job': job, 'tags': tags})
+    requirements = [req.strip()
+                    for req in job.requirements.split("\n") if req.strip()]
+    return render(request, template_name='site/job-details.html', context={'job': job, 'tags': tags, 'requirements': requirements})
 
 
 def register(request):

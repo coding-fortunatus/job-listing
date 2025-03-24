@@ -19,10 +19,17 @@
                                     <div class="row align-items-center">
                                         <div class="col-md-2">
                                             <div class="company-logo">
-                                                <img src="{% static 'assets/img/company-logo/1.png' %}"
-                                                     height=""
-                                                     width=""
-                                                     alt="logo">
+                                                {% if job.user_id.company_logo %}
+                                                    <img src="{{ job.user_id.company_logo.url }}"
+                                                         height=""
+                                                         width=""
+                                                         alt="logo">
+                                                {% else %}
+                                                    <img src="{% static 'assets/img/company-logo/1.png' %}"
+                                                         height=""
+                                                         width=""
+                                                         alt="logo">
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="col-md-10">
@@ -31,7 +38,7 @@
                                                 <ul>
                                                     <li>
                                                         <i class="bx bx-location-plus"></i>
-                                                        {{ job.location }}
+                                                        <td>{{ job.country }}, {{ job.city }}</td>
                                                     </li>
                                                     <li>
                                                         <i class="bx bx-filter-alt"></i>
@@ -53,36 +60,16 @@
                                 <div class="details-text">
                                     <h3>Description</h3>
                                     <p>{{ job.description }}</p>
-                                    <p>
-                                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                                    </p>
                                 </div>
                                 <div class="details-text">
                                     <h3>Requirements</h3>
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                    </p>
                                     <ul>
-                                        <li>
-                                            <i class="bx bx-check"></i>
-                                            Work experience
-                                        </li>
-                                        <li>
-                                            <i class="bx bx-check"></i>
-                                            Skills (soft skills and/or technical skills)
-                                        </li>
-                                        <li>
-                                            <i class="bx bx-check"></i>
-                                            WPersonal qualities and attributes.
-                                        </li>
-                                        <li>
-                                            <i class="bx bx-check"></i>
-                                            Support software roll-outs to production.
-                                        </li>
-                                        <li>
-                                            <i class="bx bx-check"></i>
-                                            Guide and mentor junior engineers. Serve as team lead if appropriate.
-                                        </li>
+                                        {% for requirement in requirements %}
+                                            <li>
+                                                <i class="bx bx-check"></i>
+                                                {{ requirement }}
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="details-text">
@@ -101,7 +88,7 @@
                                                         <td>
                                                             <span>Location: &ensp;</span>
                                                         </td>
-                                                        <td>{{ job.location }}</td>
+                                                        <td>{{ job.country }}, {{ job.city }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
@@ -160,8 +147,8 @@
                         <h3>Posted By</h3>
                         <div class="posted-by">
                             <img src="{{ job.user_id.picture.url }}"
-                                 height=""
-                                 width=""
+                                 height="100"
+                                 width="100"
                                  alt="client image">
                             <h4>{{ job.user_id }}</h4>
                             <span>{{ job.company_name }}</span>
