@@ -54,10 +54,16 @@
                             {{ form.company_website }}
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label>Location</label>
-                            {{ form.location }}
+                            <label>City / State</label>
+                            {{ form.city }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Country / Region</label>
+                            {{ form.country }}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -84,7 +90,13 @@
                             {{ form.experience }}
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Job Requirements</label>
+                            {{ form.requirements }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Job Description</label>
                             {{ form.description }}

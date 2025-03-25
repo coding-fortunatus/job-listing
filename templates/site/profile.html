@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    Post Job Advert
+    User profile
 {% endblock title %}
 {% block content %}
     {% include "partials/loader.html" %}
@@ -29,129 +29,162 @@
                         <form class="basic-info" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Profile Picture</label>
-                                        {{ form.picture }}
+                                {% if user.role == "employer" %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Profile Picture</label>
+                                            {{ form.picture }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Resume or CV</label>
-                                        {{ form.resume_cv }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Company Logo</label>
+                                            {{ form.company_logo }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Full Name</label>
-                                        {{ form.fullname }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Full Name</label>
+                                            {{ form.fullname }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Job Position</label>
-                                        {{ form.position }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Job Position</label>
+                                            {{ form.position }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Phone Number</label>
-                                        {{ form.phone }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            {{ form.phone }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Primary Category</label>
-                                        {{ form.category }}
+                                {% else %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Profile Picture</label>
+                                            {{ form.picture }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Secondary Category</label>
-                                        {{ form.secondary_category }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Resume or CV</label>
+                                            {{ form.resume_cv }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Mode of Work</label>
-                                        {{ form.employment_options }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Full Name</label>
+                                            {{ form.fullname }}
+                                        </div>
                                     </div>
-                                </div>
-                                <h3>Address</h3>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Your Country</label>
-                                        {{ form.country_of_residence }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Job Position</label>
+                                            {{ form.position }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Your City</label>
-                                        {{ form.city_of_residence }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            {{ form.phone }}
+                                        </div>
                                     </div>
-                                </div>
-                                <h3>Other information</h3>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Salary</label>
-                                        {{ form.salary_expectation }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Primary Category</label>
+                                            {{ form.category }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Years of Experience</label>
-                                        {{ form.experience }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Secondary Category</label>
+                                            {{ form.secondary_category }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Work Experience</label>
-                                        {{ form.work_experience }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Mode of Work</label>
+                                            {{ form.employment_options }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Accomplishment(s)</label>
-                                        {{ form.accomplishments }}
+                                    <h3>Address</h3>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Your Country</label>
+                                            {{ form.country_of_residence }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Skills</label>
-                                        {{ form.skills }}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Your City</label>
+                                            {{ form.city_of_residence }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Expectation from Employer</label>
-                                        {{ form.expectations }}
+                                    <h3>Other information</h3>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Salary</label>
+                                            {{ form.salary_expectation }}
+                                        </div>
                                     </div>
-                                </div>
-                                <h3>Social links</h3>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Facebook</label>
-                                        <input type="text" class="form-control" placeholder="www.facebook.com/user" />
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Years of Experience</label>
+                                            {{ form.experience }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Twitter</label>
-                                        <input type="number" class="form-control" placeholder="www.twitter.com/user" />
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Work Experience</label>
+                                            {{ form.work_experience }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Linkedin</label>
-                                        <input type="text" class="form-control" placeholder="www.Linkedin.com/user" />
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Accomplishment(s)</label>
+                                            {{ form.accomplishments }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Github</label>
-                                        <input type="text" class="form-control" placeholder="www.Github.com/user" />
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Skills</label>
+                                            {{ form.skills }}
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Expectation from Employer</label>
+                                            {{ form.expectations }}
+                                        </div>
+                                    </div>
+                                    {% comment %} <h3>Social links</h3>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Facebook</label>
+                                            <input type="text" class="form-control" placeholder="www.facebook.com/user" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Twitter</label>
+                                            <input type="number" class="form-control" placeholder="www.twitter.com/user" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Linkedin</label>
+                                            <input type="text" class="form-control" placeholder="www.Linkedin.com/user" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Github</label>
+                                            <input type="text" class="form-control" placeholder="www.Github.com/user" />
+                                        </div>
+                                    </div> {% endcomment %}
+                                {% endif %}
                                 <div class="col-md-12">
                                     <button type="submit" class="account-btn">Save</button>
                                 </div>

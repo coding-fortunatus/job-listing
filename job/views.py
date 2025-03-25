@@ -48,6 +48,12 @@ def user_applied_jobs(request):
 
 
 @login_required(login_url='login')
+def employer_jobs(request):
+    jobs = Job.objects.filter(user_id=request.user)
+    return render(request, template_name='site/employer-jobs.html', context={'jobs': jobs})
+
+
+@login_required(login_url='login')
 def apply(request, job_id):
     jobTo = Job.objects.get(id=job_id)
     userResume = request.user.resume_cv.name.replace('resumes/', '')

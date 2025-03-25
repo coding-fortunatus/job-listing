@@ -53,7 +53,7 @@ class UpdateUserProfileForm(forms.ModelForm):
     class Meta:
         model = User  # Use your actual User model
         fields = [
-            'fullname', 'position', 'phone',
+            'fullname', 'position', 'phone', 'company_logo',
             'picture', 'category', 'secondary_category', 'country_of_residence',
             'city_of_residence', 'salary_expectation', 'resume_cv', 'skills',
             'experience', 'english_level', 'work_experience', 'accomplishments',
@@ -85,7 +85,7 @@ class PostJobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = [
-            'title', 'job_category', 'company_name', 'company_email', 'company_website', 'city', 'country', 'job_type', 'job_tags', 'salary', 'experience',
+            'title', 'job_category', 'company_name', 'company_email', 'company_website', 'city', 'country', 'job_type', 'job_tags', 'salary', 'experience', 'requirements',
             'description',
         ]
         widgets = {
@@ -100,5 +100,6 @@ class PostJobForm(forms.ModelForm):
             'job_tags': forms.TextInput(attrs={'class': 'form-control'}),
             'salary': forms.TextInput(attrs={'class': 'form-control'}),
             'experience': forms.NumberInput(attrs={'class': 'form-control'}),
+            'requirements': forms.Textarea(attrs={'class': 'form-control description-area'}),
             'description': forms.Textarea(attrs={'class': 'form-control description-area'}),
         }

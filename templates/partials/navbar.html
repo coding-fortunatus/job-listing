@@ -27,11 +27,21 @@
                                class="nav-link
                                       {% if request.path == '/' %}active{% endif %}">All Jobs</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{% url "recommended_jobs" %}"
-                               class="nav-link
-                                      {% if request.path == '/recommended-jobs' %}active{% endif %}">Recommended</a>
-                        </li>
+                        {% if user.is_authenticated %}
+                            {% if user.role == "candidate" %}
+                                <li class="nav-item">
+                                    <a href="{% url "recommended_jobs" %}"
+                                       class="nav-link
+                                              {% if request.path == '/recommended-jobs' %}active{% endif %}">Recommended</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a href="{% url "post_job" %}"
+                                       class="nav-link
+                                              {% if request.path == '/post-job' %}active{% endif %}">Post Job Advert</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
                         {% comment %} <li class="nav-item">
                             <a href="#" class="nav-link">Company</a>
                         </li> {% endcomment %}
