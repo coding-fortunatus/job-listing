@@ -139,9 +139,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="theme-btn">
-                                    <a href="{% url 'apply' job.id %}" class="default-btn">Apply Now</a>
-                                </div>
+                                {% if user.role == "candidate" %}
+                                    <div class="theme-btn">
+                                        <a href="{% url 'apply' job.id %}" class="default-btn">Apply Now</a>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

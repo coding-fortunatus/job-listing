@@ -27,7 +27,10 @@
                                                         <div class="col-lg-3">
                                                             <div class="thumb-img">
                                                                 {% if job.user_id.company_logo %}
-                                                                    <img src="{{ job.user.company_logo.url }}" height="" width="" alt="logo">
+                                                                    <img src="{{ job.user_id.company_logo.url }}"
+                                                                         height=""
+                                                                         width=""
+                                                                         alt="logo">
                                                                 {% else %}
                                                                     <img src="{% static 'assets/img/company-logo/1.png' %}"
                                                                          height=""
@@ -43,7 +46,7 @@
                                                                 </h3>
                                                                 <ul>
                                                                     <li>
-                                                                        @ <a>{{ job.job.company_name }}</a>
+                                                                        @ <a href="{{ job.job.company_website }}" targer="__blank">{{ job.job.company_name }}</a>
                                                                     </li>
                                                                     <li>
                                                                         <i class="bx bx-location-plus"></i>

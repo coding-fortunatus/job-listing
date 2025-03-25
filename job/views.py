@@ -35,7 +35,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Automatically log in the user
-            redirect('index')  # Redirect to homepage
+            return redirect('index')  # Redirect to homepage
     else:
         form = CustomUserRegistrationForm()
     return render(request, template_name='site/register.html', context={'form': form})
