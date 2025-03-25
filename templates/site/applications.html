@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+    Submitted Applications
+{% endblock title %}
+{% block content %}
+    {% include "partials/loader.html" %}
+    {% include "partials/navbar.html" %}
+    <!-- Account Area Start -->
+    <section class="account-section ptb-100">
+        <div class="container">
+            <div class="row">
+                {% include "partials/side_bar.html" %}
+                <div class="col-md-8">
+                    <div class="account-details">
+                        {% if applications %}<h3 class="text-center">Applications Recieved</h3>{% endif %}
+                        <!-- Jobs Section Start -->
+                        <section class="job-style-two job-list-section pt-3 pb-70">
+                            <div class="container">
+                                <div class="row">
+                                    {% if applications %}
+                                        {% for application in applications %}
+                                            <div class="col-lg-12">
+                                                <div class="job-card-two">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-1">
+                                                            {% if application.user.picture %}
+                                                                <img src="{{ application.user.picture.url }}"
+                                                                     height=""
+                                                                     width=""
+                                                                     class="rounded-circle img-fluid"
+                                                                     alt="user picture" />
+                                                            {% else %}
+                                                                <a href="{{ application.company_website }}">
+                                                                    <img src="{% static 'assets/img/default.jpg' %}"
+                                                                         height=""
+                                                                         width=""
+                                                                         alt="logo" />
+                                                                </a>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="job-info">
+                                                                <h3>
+                                                                    <a>{{ application.user.fullname }}</a>
+                                                                </h3>
+                                                                <a><span>Applied Job</span> {{ application.job.title }}</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="theme-btn text-end">
+                                                                <a href="{% url 'job_details' application.id %}" class="default-btn">View</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="col-lg-12">
+                                            <div class="job-card-two">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-12 text-center">
+                                                        <div class="job-info">
+                                                            <h3>
+                                                                <a>You haven't recieved any application</a>
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Jobs Section End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Account Area End -->
+    {% include "partials/footer.html" %}
+    <!-- Footer Section End -->
+{% endblock content %}

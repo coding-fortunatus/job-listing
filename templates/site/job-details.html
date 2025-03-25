@@ -106,15 +106,7 @@
                                                         <td>
                                                             <span>Job Type: &ensp;</span>
                                                         </td>
-                                                        <td>{{ job.job_type }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span>Email: &ensp;</span>
-                                                        </td>
-                                                        <td>
-                                                            <a>{{ job.company_email }}</a>
-                                                        </td>
+                                                        <td>{{ job.get_job_type_display }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -136,10 +128,10 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <span>Website: &ensp;</span>
+                                                            <span>Email: &ensp;</span>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ job.company_website }}">{{ job.company_website }}</a>
+                                                            <a>{{ job.company_email }}</a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -163,7 +155,9 @@
                                  width="100"
                                  alt="client image">
                             <h4>{{ job.user_id }}</h4>
-                            <span>{{ job.company_name }}</span>
+                            <a href="{{ job.company_website }}">{{ job.company_name }}</a>
+                            <br>
+                            <span>{{ job.user_id.email }}</span>
                         </div>
                     </div>
                     <div class="job-sidebar">
@@ -172,7 +166,7 @@
                             {% if tags %}
                                 {% for tag in tags %}
                                     <li>
-                                        <a href="#">{{ tag }}</a>
+                                        <a class="hover">{{ tag }}</a>
                                     </li>
                                 {% endfor %}
                             {% endif %}

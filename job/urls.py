@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import register, user_login, index, user_logout, profile, post_job, job_details, recommended_jobs, apply, user_applied_jobs, employer_jobs
+from .views import register, user_login, index, user_logout, profile, post_job, job_details, recommended_jobs, apply, user_applied_jobs, employer_jobs, applications
 
 urlpatterns = [
     path('', index, name='index'),
@@ -12,5 +12,6 @@ urlpatterns = [
     path('job/<int:job_id>', job_details, name='job_details'),
     path('job/<int:job_id>/apply', apply, name='apply'),
     path('user-applied-jobs', user_applied_jobs, name='user_applied_jobs'),
-    path('employer-jobs', employer_jobs, name='employer_jobs')
+    path('employer-jobs', employer_jobs, name='employer_jobs'),
+    path('applications', applications, name='applications'),
 ]

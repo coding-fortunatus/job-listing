@@ -27,56 +27,6 @@ def index(request):
     return render(request, template_name='site/index.html', context={'jobs': jobs})
 
 
-@login_required(login_url='login')
-def recommended_jobs(request):
-    jobs = Job.objects.filter(job_tags__icontains=request.user.category)
-    return render(request, template_name='site/recommend.html', context={'jobs': jobs})
-
-
-def job_details(request, job_id):
-    job = Job.objects.get(id=job_id)
-    tags = job.job_tags.split(',')
-    requirements = [req.strip()
-                    for req in job.requirements.split("\n") if req.strip()]
-    return render(request, template_name='site/job-details.html', context={'job': job, 'tags': tags, 'requirements': requirements})
-
-
-@login_required(login_url='login')
-def user_applied_jobs(request):
-    jobs = Application.objects.filter(user=request.user)
-    return render(request, template_name='site/applied_jobs.html', context={'jobs': jobs})
-
-
-@login_required(login_url='login')
-def employer_jobs(request):
-    jobs = Job.objects.filter(user_id=request.user)
-    return render(request, template_name='site/employer-jobs.html', context={'jobs': jobs})
-
-
-@login_required(login_url='login')
-def apply(request, job_id):
-    jobTo = Job.objects.get(id=job_id)
-    userResume = request.user.resume_cv.name.replace('resumes/', '')
-
-    if request.method == "POST":
-        # Check if the user has already applied
-        if Application.objects.filter(user=request.user, job=jobTo).exists():
-            messages.warning(request, "You have already applied for this job.")
-            return redirect('job_details', job_id=job_id)
-
-        # Get form data
-        cover = request.POST.get('message', '').strip()
-        resume = request.user.resume_cv
-        user = request.user
-
-        # Save the application
-        Application.objects.create(
-            user=user, job=jobTo, cover=cover, resume=resume)
-        messages.success(request, "Application submitted successfully.")
-        return redirect('apply', job_id=job_id)
-    return render(request, template_name='site/apply.html', context={'job': jobTo, 'resume': userResume})
-
-
 def register(request):
     if request.user.is_authenticated:
         return redirect("index")
@@ -143,6 +93,10 @@ def profile(request):
 @login_required(login_url='login')
 def post_job(request):
     if request.method == 'POST':
+        # Restrict users that are not employer from posting job advert
+        if request.user.role != 'employer':
+            messages.warning(request, "Candidate cannot post job advert")
+            return redirect('index')
         form = PostJobForm(request.POST)
         form.instance.user_id = request.user
         if form.is_valid():
@@ -152,3 +106,63 @@ def post_job(request):
     else:
         form = PostJobForm()
     return render(request, template_name='site/post-job.html', context={'form': form})
+
+
+def job_details(request, job_id):
+    job = Job.objects.get(id=job_id)
+    tags = job.job_tags.split(',')
+    requirements = [req.strip()
+                    for req in job.requirements.split("\n") if req.strip()]
+    return render(request, template_name='site/job-details.html', context={'job': job, 'tags': tags, 'requirements': requirements})
+
+
+@login_required(login_url='login')
+def recommended_jobs(request):
+    jobs = Job.objects.filter(job_tags__icontains=request.user.category)
+    return render(request, template_name='site/recommend.html', context={'jobs': jobs})
+
+
+@login_required(login_url='login')
+def user_applied_jobs(request):
+    jobs = Application.objects.filter(user=request.user)
+    return render(request, template_name='site/applied_jobs.html', context={'jobs': jobs})
+
+
+@login_required(login_url='login')
+def employer_jobs(request):
+    jobs = Job.objects.filter(user_id=request.user)
+    return render(request, template_name='site/employer-jobs.html', context={'jobs': jobs})
+
+
+@login_required(login_url='login')
+def apply(request, job_id):
+    jobTo = Job.objects.get(id=job_id)
+    userResume = request.user.resume_cv.name.replace('resumes/', '')
+
+    if request.method == "POST":
+        # Restrict employer or Job poster from applying to job
+        if Job.objects.filter(id=job_id, user_id=request.user).exists() or request.user.role == 'employer':
+            messages.warning(request, "Employer cannot apply for this job.")
+            return redirect('job_details', job_id=job_id)
+
+        # Check if the user has already applied
+        if Application.objects.filter(user=request.user, job=jobTo).exists():
+            messages.warning(request, "You have already applied for this job.")
+            return redirect('job_details', job_id=job_id)
+
+        # Get form data
+        cover = request.POST.get('message', '').strip()
+        resume = request.user.resume_cv
+        user = request.user
+
+        # Save the application
+        Application.objects.create(
+            user=user, job=jobTo, cover=cover, resume=resume)
+        messages.success(request, "Application submitted successfully.")
+        return redirect('job_details', job_id=job_id)
+    return render(request, template_name='site/apply.html', context={'job': jobTo, 'resume': userResume})
+
+
+def applications(request):
+    applications = Application.objects.filter(job__user_id=request.user)
+    return render(request, template_name='site/applications.html', context={'applications': applications})
