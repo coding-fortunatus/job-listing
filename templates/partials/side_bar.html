@@ -1,0 +1,53 @@
+{% load static %}
+<div class="col-md-4">
+    <div class="account-information">
+        <div class="profile-thumb">
+            {% if user.picture %}
+                <img src="{{ user.picture.url }}"
+                     alt="Profile Picture"
+                     width="200"
+                     height="200">
+            {% else %}
+                <img src="{% static 'assets/img/default.jpg' %}"
+                     height="150"
+                     width="150"
+                     alt="Profile Picture" />
+            {% endif %}
+            <h3>{{ user.fullname.upper }}</h3>
+            <h6>{{ user.position.upper }}</h6>
+            <p>{{ user.email }}</p>
+        </div>
+        <ul>
+            <li>
+                <a class="{% if request.path == '/profile' %}
+                              active
+                          {% endif %}"
+                   href="{% url 'profile' %}">
+                    <i class="bx bx-user"></i>
+                    My Profile
+                </a>
+            </li>
+            <li>
+                <a class="{% if request.path == '/user-applied-jobs' %}
+                              active
+                          {% endif %}"
+                   href="{% url 'user_applied_jobs' %}">
+                    <i class="bx bx-briefcase"></i>
+                    Applied Job
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bx bx-lock-alt"></i>
+                    Change Password
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">
+                    <i class="bx bx-log-out"></i>
+                    Log Out
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

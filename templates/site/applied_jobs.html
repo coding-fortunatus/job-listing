@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+    Post Job Advert
+{% endblock title %}
+{% block content %}
+    {% include "partials/loader.html" %}
+    {% include "partials/navbar.html" %}
+    <!-- Account Area Start -->
+    <section class="account-section ptb-100">
+        <div class="container">
+            <div class="row">
+                {% include "partials/side_bar.html" %}
+                <div class="col-md-8">
+                    <div class="account-details">
+                        <h3 class="text-center">Jobs you applied to</h3>
+                        <!-- Jobs Section Start -->
+                        <section class="job-section jobs-grid-section pt-4 pb-70">
+                            <div class="container">
+                                <div class="row">
+                                    {% if jobs %}
+                                        {% for job in jobs %}
+                                            <div class="col-md-12">
+                                                <div class="job-card">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-3">
+                                                            <div class="thumb-img">
+                                                                {% if job.user_id.company_logo %}
+                                                                    <img src="{{ job.user.company_logo.url }}" height="" width="" alt="logo">
+                                                                {% else %}
+                                                                    <img src="{% static 'assets/img/company-logo/1.png' %}"
+                                                                         height=""
+                                                                         width=""
+                                                                         alt="logo">
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="job-info">
+                                                                <h3>
+                                                                    <a href="{% url 'job_details' job.job.id %}">{{ job.job.title }}</a>
+                                                                </h3>
+                                                                <ul>
+                                                                    <li>
+                                                                        @ <a>{{ job.job.company_name }}</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i class="bx bx-location-plus"></i>
+                                                                        {{ job.job.city }}, {{ job.job.country }}
+                                                                    </li>
+                                                                    <li>
+                                                                        <i class="bx bx-filter-alt"></i>
+                                                                        {{ job.job.get_job_category_display }}
+                                                                    </li>
+                                                                    <li>
+                                                                        <i class="bx bx-dollar"></i>
+                                                                        {{ job.job.salary|intcomma }}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="job-save">
+                                                                <span>{{ job.job.get_job_type_display }}</span>
+                                                                {% comment %} <a href="#">
+                                                                <i class="bx bx-heart"></i>
+                                                                </a> {% endcomment %}
+                                                                <p>
+                                                                    <i class="bx bx-stopwatch"></i>
+                                                                    {{ job.created_at|timesince }} Ago
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="col-lg-12">
+                                            <div class="job-card-two">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-12 text-center">
+                                                        <div class="job-info">
+                                                            <h3>
+                                                                <a href="#">You haven't apply for any job yet</a>
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Jobs Section End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Account Area End -->
+    {% include "partials/footer.html" %}
+    <!-- Footer Section End -->
+{% endblock content %}
