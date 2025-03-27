@@ -30,9 +30,9 @@
                         {% if user.is_authenticated %}
                             {% if user.role == "candidate" %}
                                 <li class="nav-item">
-                                    <a href="{% url "recommended_jobs" %}"
+                                    <a href="{% url "recommendations" user.id %}"
                                        class="nav-link
-                                              {% if request.path == '/recommended-jobs' %}active{% endif %}">Recommended</a>
+                                              {% if request.path == request.resolver_match.url_name %}active{% endif %}">Recommended</a>
                                 </li>
                             {% else %}
                                 <li class="nav-item">
