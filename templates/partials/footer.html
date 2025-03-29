@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'recommendations' user.id %}">
+                            <a href="{% if user.is_authenticated %}{% url 'recommendations' user.id %}{% endif %}">
                                 <i class="bx bx-chevrons-right bx-tada"></i>
                                 Job List
                             </a>

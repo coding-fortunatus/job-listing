@@ -30,9 +30,7 @@
                         {% if user.is_authenticated %}
                             {% if user.role == "candidate" %}
                                 <li class="nav-item">
-                                    <a href="{% url "recommendations" user.id %}"
-                                       class="nav-link
-                                              {% if request.path == request.resolver_match.url_name %}active{% endif %}">Recommended</a>
+                                    <a href="{% url "recommendations" user.id %}" class="nav-link ">Recommended</a>
                                 </li>
                             {% else %}
                                 <li class="nav-item">
@@ -42,9 +40,6 @@
                                 </li>
                             {% endif %}
                         {% endif %}
-                        {% comment %} <li class="nav-item">
-                            <a href="#" class="nav-link">Company</a>
-                        </li> {% endcomment %}
                     </ul>
                     <div class="other-option">
                         {% if user.is_authenticated %}
