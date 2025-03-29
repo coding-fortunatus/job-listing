@@ -17,7 +17,7 @@ def recommend_jobs(user_id, top_n=3):
 
     user_df = pd.DataFrame([{
         'user_id': user.id,
-        'profile': f"{user.work_experience} {user.skills} {user.category} {user.secondary_category}"
+        'profile': f"{user.position} {user.work_experience} {user.skills} {user.category} {user.secondary_category}"
     }])
 
     job_df = pd.DataFrame([{
@@ -43,11 +43,6 @@ def recommend_jobs(user_id, top_n=3):
         "job_id", "title"]].to_dict(orient="records")
     return recommended_jobs
 
-
-# def recommendations(request, user_id):
-#     """Django View for job recommendations"""
-#     recommendations = recommend_jobs(user_id)
-#     return JsonResponse(recommendations, safe=False)
 
 def recommendations(request, user_id):
     recommended_jobs = recommend_jobs(user_id)

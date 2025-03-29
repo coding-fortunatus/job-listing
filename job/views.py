@@ -17,11 +17,11 @@ def index(request):
         location = request.GET.get('location')
         if title and location:
             jobs = Job.objects.filter(
-                title__icontains=title, location__icontains=location)
+                title__icontains=title, city__icontains=location)
         elif title:
             jobs = Job.objects.filter(title__icontains=title)
         elif location:
-            jobs = Job.objects.filter(location__icontains=location)
+            jobs = Job.objects.filter(city__icontains=location)
         else:
             jobs = Job.objects.all()
     return render(request, template_name='site/index.html', context={'jobs': jobs})
