@@ -124,7 +124,7 @@
                                                         <td>
                                                             <span>Salary: &ensp;</span>
                                                         </td>
-                                                        <td>${{ job.salary|intcomma }}</td>
+                                                        <td>₦{{ job.salary|intcomma }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
@@ -152,10 +152,17 @@
                     <div class="job-sidebar">
                         <h3>Posted By</h3>
                         <div class="posted-by">
-                            <img src="{{ job.user_id.picture.url }}"
-                                 height="100"
-                                 width="100"
-                                 alt="client image">
+                            {% if job.user_id.picture %}
+                                <img src="{{ job.user_id.picture.url }}"
+                                     height="100"
+                                     width="100"
+                                     alt="client image">
+                            {% else %}
+                                <img src="{% static 'assets/img/company-logo/1.png' %}"
+                                     height="100"
+                                     width="100"
+                                     alt="client image">
+                            {% endif %}
                             <h4>{{ job.user_id }}</h4>
                             <a href="{{ job.company_website }}">{{ job.company_name }}</a>
                             <br>

@@ -40,17 +40,20 @@
                                                                 </a>
                                                             {% endif %}
                                                         </div>
-                                                        <div class="col-md-8">
+                                                        <div class="col-md-7">
                                                             <div class="job-info">
                                                                 <h3>
                                                                     <a>{{ application.user.fullname }}</a>
                                                                 </h3>
-                                                                <a><span>Applied Job</span> {{ application.job.title }}</a>
+                                                                <a><span>{{ application.job.title }}</span></a>
+                                                                <a><span>{{ application.created_at|naturaltime }}</span> </a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <div class="theme-btn text-end">
-                                                                <a disabled readonly class="default-btn">View</a>
+                                                                <a href="{{ application.user.resume_cv.url }}"
+                                                                   target="__blank"
+                                                                   class="default-btn">CV or RESUME</a>
                                                             </div>
                                                         </div>
                                                     </div>
